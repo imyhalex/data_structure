@@ -1,4 +1,4 @@
-package edu.nyu.cs.RecursivePalindromeUsingSubstring;
+package edu.nyu.cs.Recursion.RecursivePalindromeUsingSubstring;
 
 public class RecursivePalindromeUsingSubstring {
     

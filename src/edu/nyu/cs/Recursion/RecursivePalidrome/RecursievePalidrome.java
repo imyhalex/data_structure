@@ -1,4 +1,4 @@
-package edu.nyu.cs.RecursivePalidrome;
+package edu.nyu.cs.Recursion.RecursivePalidrome;
 
 // Example of recursive helper method
 public class RecursievePalidrome {

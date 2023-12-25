@@ -1,4 +1,4 @@
-package edu.nyu.cs.RecursiveSelectionSort;
+package edu.nyu.cs.Recursion.RecursiveSelectionSort;
 
 public class RecursiveSelectionSort {
     
