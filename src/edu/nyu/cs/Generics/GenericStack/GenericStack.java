@@ -90,3 +90,43 @@ class GenericStackInArray<E> {
     }
 }
 
+// Implement GenericStack using inheritance
+class GenericStack3<E> extends ArrayList<E> {
+
+    public GenericStack3() {
+
+    }
+
+    public int getSize() {
+        return this.size();
+    }
+
+    public E peek() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return this.get(getSize() - 1);
+    }
+
+    public void push(E o) {
+        this.add(o);
+    }
+
+    public E pop() {
+        if (isEmpty()) {
+            throw new IllegalStateException("Stack is empty");
+        }
+        return this.remove(getSize() - 1);
+    }
+
+    public boolean isEmpty() {
+        return super.isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        return "stack: " + Arrays.toString(super.toArray());
+    }
+
+}
+
