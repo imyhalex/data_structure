@@ -1,6 +1,5 @@
 package edu.nyu.cs.LinkedList.LinkedList;
 
-
 public class LinkedList<E> {
     private Node head;
     private Node tail;

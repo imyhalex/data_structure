@@ -1,5 +1,7 @@
 package edu.nyu.cs.LinkedList.LinkedListUdemy;
 
+import java.util.HashSet;
+
 public class LinkedList {
     
     private Node head;
@@ -177,6 +179,143 @@ public class LinkedList {
             before = temp;
             temp = after;
         }
+    }
+
+    public Node findMiddleNode() {
+        Node slow = head; // this will cover half of the list
+        Node fast = head; // this will cover the whole list
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    // Find out if a list holds a pattern
+    public boolean hasLoop() {
+        Node slow = head;
+        Node fast = head;
+        while(fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if (slow == fast) return true;
+        }
+        return false;
+    }
+
+    public Node findKthFromEnd(int k) {
+        Node slow = head;
+        Node fast = head;
+        // A for loop to take fast k steps forward
+        for (int i = 0; i < k; i++) {
+            if (fast == null) return null;
+            fast = fast.next;
+        }
+        // A while loop until fast is null, then for slow the rest is kth number from the end
+        while (fast != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+    }
+
+    public void partitionList(int x) {
+        // Step 1: Check for an empty list.
+        // If the list is empty, there is nothing
+        // to partition, so we exit the method.
+        if (head == null) return;
+
+        // Step 2: Create two dummy nodes.
+        // We create dummy nodes to act as the
+        // starting points for our two new lists.
+        Node dummy1 = new Node(0);
+        Node dummy2 = new Node(0);
+
+        // Step 3: Initialize list pointers.
+        // We'll use 'prev1' and 'prev2' to keep track
+        // of the last nodes in our two new lists.
+        Node prev1 = dummy1;
+        Node prev2 = dummy2;
+
+        Node current = head;
+
+        while(current != null) {
+            if (current.value < x) {
+                prev1.next = current;
+                prev1 = current;
+            } else {
+                prev2.next = current;
+                prev2 = current;
+            }
+            current = current.next;
+        }
+
+        prev2.next = null;
+        prev1.next = dummy2.next; // connect two partition together
+
+        head = dummy1.next;
+    }
+
+    // Use the HashSet
+    public void removeDuplicates() {
+        HashSet<Integer> values = new HashSet<>();
+        Node previous = null;
+        Node current = head;
+        while (current != null) {
+            if (values.contains(current.value)) {
+                previous.next = current.next;
+                length -= 1;
+            } else {
+                values.add(current.value);
+                previous = current;
+            }
+            current = current.next;
+        }
+    }
+
+    // Without using HashSet
+    public void removeDuplicates2() {
+        Node current = head;
+        while (current != null) {
+            Node runner = current;
+            while (runner.next != null) {
+                if (runner.next.value == current.value) {
+                    runner.next = runner.next.next;
+                    length -= 1;
+                } else {
+                    runner = runner.next;
+                }
+            }
+            current = current.next;
+        }
+    }
+
+    public int binaryToDecimal() {
+        Node current = head;
+        int num = 0;
+        while (current != null) {
+            num = num * 2 + current.value;
+            current = current.next;
+        }
+        return num;
+    }
+
+    public void reverseBetween(int start, int end) {
+        if (length == 0) return;
+        Node dummyNode = new Node(0);
+        dummyNode.next = head;
+        Node previousNode = dummyNode;
+        for (int i = 0; i < start; i++) {
+            previousNode = previousNode.next;
+        }
+        Node currentNode = previousNode.next;
+        for (int i = 0; i < end; i++) {
+            Node nodeToMove = currentNode.next;
+            currentNode.next = nodeToMove.next;
+            nodeToMove.next = previousNode.next;
+            previousNode.next = nodeToMove;
+        }
+        head = dummyNode.next;
     }
 }
 
