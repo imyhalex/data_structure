@@ -300,37 +300,60 @@ public class LinkedList {
         return num;
     }
 
-    public void reverseBetween(int start, int end) {
-        // Check if the list is empty; if so, return immediately
-        if (length == 0) return;
+    // public void reverseBetween(int start, int end) {
+    //     // Check if the list is empty; if so, return immediately
+    //     if (length == 0) return;
     
-        // Create a dummy node and set it to point to the head of the list
+    //     // Create a dummy node and set it to point to the head of the list
+    //     Node dummyNode = new Node(0);
+    //     dummyNode.next = head;
+    
+    //     // Find the node just before the start of the section to be reversed
+    //     Node previousNode = dummyNode;
+    //     for (int i = 0; i < start - 1; i++) {
+    //         previousNode = previousNode.next;
+    //     }
+    
+    //     // 'currentNode' will initially point to the first node in the section to be reversed
+    //     Node currentNode = previousNode.next;
+    
+    //     // Reverse the nodes in the specified range
+    //     for (int i = 0; i < end - start; i++) {
+    //         // Identify the next node to be moved
+    //         Node nodeToMove = currentNode.next;
+    
+    //         // Adjust 'currentNode.next' to skip over 'nodeToMove'
+    //         currentNode.next = nodeToMove.next;
+    
+    //         // Place 'nodeToMove' right after 'previousNode'
+    //         nodeToMove.next = previousNode.next;
+    //         previousNode.next = nodeToMove;
+    //     }
+    
+    //     // Update the head of the list in case it was affected by the reversal
+    //     head = dummyNode.next;
+    // }
+
+    public void reverseBetween(int startIndex, int endIndex) {
+        if (head == null) return;
+    
         Node dummyNode = new Node(0);
         dummyNode.next = head;
-    
-        // Find the node just before the start of the section to be reversed
         Node previousNode = dummyNode;
-        for (int i = 0; i < start; i++) {
+    
+        for (int i = 0; i < startIndex; i++) {
             previousNode = previousNode.next;
         }
     
-        // 'currentNode' will initially point to the first node in the section to be reversed
         Node currentNode = previousNode.next;
     
-        // Reverse the nodes in the specified range
-        for (int i = 0; i < end - start; i++) {
-            // Identify the next node to be moved
+        for (int i = 0; i < endIndex - startIndex; i++) {
             Node nodeToMove = currentNode.next;
-    
-            // Adjust 'currentNode.next' to skip over 'nodeToMove'
             currentNode.next = nodeToMove.next;
-    
-            // Place 'nodeToMove' right after 'previousNode'
             nodeToMove.next = previousNode.next;
             previousNode.next = nodeToMove;
         }
     
-        // Update the head of the list in case it was affected by the reversal
         head = dummyNode.next;
     }
 }
