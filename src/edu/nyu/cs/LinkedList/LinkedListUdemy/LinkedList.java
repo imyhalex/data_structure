@@ -310,7 +310,7 @@ public class LinkedList {
     
         // Find the node just before the start of the section to be reversed
         Node previousNode = dummyNode;
-        for (int i = 0; i < start - 1; i++) {
+        for (int i = 0; i < start; i++) {
             previousNode = previousNode.next;
         }
     
