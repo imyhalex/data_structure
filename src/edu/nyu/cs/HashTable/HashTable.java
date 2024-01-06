@@ -1,6 +1,7 @@
 package edu.nyu.cs.HashTable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -130,5 +131,79 @@ public class HashTable {
         }
  
         return null;
+    }
+
+    // Coding Exercise: Group Anagrams
+    public static List<List<String>> groupAnagrams(String[] strings) {
+        Map<String, List<String>> anagramGroup = new HashMap<>();
+
+        // For each string in strings
+        for (String string : strings) {
+            char[] charArr = string.toCharArray();
+            Arrays.sort(charArr); // Sort the word
+            String canonical = new String(charArr);
+
+            if (anagramGroup.containsKey(canonical)) {
+                anagramGroup.get(canonical).add(string);
+            } else {
+                List<String> group = new ArrayList<>();
+                group.add(string);
+                anagramGroup.put(canonical, group);
+            }
+        }
+
+        return new ArrayList<>(anagramGroup.values());
+    }
+
+    // Coding Exercise: Two Sum
+    public static int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> numMap = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int num = nums[i];
+            int complement = target - num;
+
+            if (numMap.containsKey(complement)) 
+                return new int[]{numMap.get(complement), i};
+
+            numMap.put(num, i);
+        }
+
+        return new int[]{};
+    }
+
+    // Conding Exercise: Subarray Sum
+    /*
+     * int[] nums = [1, 2, 3, 4, 5]
+     * int target = 9
+     * int[] result1 = subarraySum(nums1, target1)
+     * This should print [1, 3]
+     * System.out.println("[" + result1[0] + ", " + result1[1] + "]");
+     */
+    // Example Execution:
+    // Start with currentSum = 0.
+    // Add 1 (first element of nums), currentSum = 1. No matching subarray yet.
+    // Add 2 (second element), currentSum = 3. No matching subarray yet.
+    // Add 3 (third element), currentSum = 6. No matching subarray yet.
+    // Add 4 (fourth element), currentSum = 10. Check if 10 - 9 = 1 is in the map. It's not.
+    // Add 5 (fifth element), currentSum = 15. Check if 15 - 9 = 6 is in the map. 
+    //      It is, because when the cumulative sum was 6 (after adding the first three numbers), the index was 2. 
+    //      So, a subarray from index 2 + 1 to 4 sums to 9.
+    // Output: [1, 3] which are the start and end indices of the subarray [2, 3, 4] whose sum is 9.
+    public static int[] subarraySum(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1); // Initialize the postion of currentSum is 0
+        int currentSum = 0;
+
+        for (int i = 0 ; i < nums.length; i++) {
+            currentSum += nums[i];
+
+            if (map.containsKey(currentSum - target))
+                return new int[]{map.get(currentSum - target) + 1, i};
+
+            map.put(currentSum, i);
+        }
+
+        return new int[]{};
     }
 }
