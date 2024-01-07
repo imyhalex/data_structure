@@ -3,8 +3,10 @@ package edu.nyu.cs.HashTable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class HashTable {
     private int size = 7; // Set as prime number to reduce the likelihood of collision
@@ -205,5 +207,74 @@ public class HashTable {
         }
 
         return new int[]{};
+    }
+
+    /* HashSet */
+
+    // Coding Exercise: Remove Duplicates
+    public static List<Integer> removeDuplicates(List<Integer> myList) {
+        Set<Integer> set = new HashSet<>(myList);
+        return new ArrayList<>(set);
+    }
+
+    // Coding Exercise: Has Unique Chars
+    public static boolean hasUniqueChars(String string) {
+        Set<Character> set = new HashSet<>();
+
+        for (char s : string.toCharArray()) {
+            if (set.contains(s)) {
+                return false;
+            } else {
+               set.add(s); 
+            }
+        }
+
+        return true;
+    }
+
+    // Coding Exercise: Find Pairs
+    public static List<int[]> findPairs(int[] arr1, int[] arr2, int target) {
+        List<int[]> list = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
+
+        for (int i : arr1) {
+            set.add(i);
+        }
+
+        for (int i : arr2) {
+            int complement = target - i;
+            if (set.contains(complement)) {
+                list.add(new int[]{complement, i});
+            }
+        }
+        return list;
+    }
+
+    // Coding Exercise: Longest Consecutive Sequence
+    public static int longestConsecutiveSequence(int[] nums) {
+        Set<Integer> set = new HashSet<>();
+        
+        for (int n : nums) {
+            set.add(n);
+        }
+
+        int longestStreak = 0;
+        for (int num : set) {
+            // Condition: if set does not contains num - 1, it means this element is the start of a new consecutive sequence;
+            if (!set.contains(num - 1)) {
+                int currentNum = num;
+                int currentStreak = 1;
+
+                while (set.contains(currentNum + 1)) {
+                    currentNum++;
+                    currentStreak++;
+                }
+
+                // Condition: continous compare the current one and the previous one;
+                longestStreak = Math.max(longestStreak, currentStreak);
+            }
+        }
+
+        return longestStreak;
     }
 }
