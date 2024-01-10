@@ -1,7 +1,7 @@
 package edu.nyu.cs.BinarySearchTree;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Queue;
 
 
@@ -138,8 +138,10 @@ public class BinarySearchTree {
 
     // Breath First Search
     public ArrayList<Integer> BFS() {
+        if (root == null) return new ArrayList<>();
+
         Node currentNod = root;
-        Queue<Node> queue = new LinkedList<>();
+        Queue<Node> queue = new ArrayDeque<>();
         ArrayList<Integer> results = new ArrayList<>();
         queue.add(currentNod);
 
