@@ -140,19 +140,19 @@ public class BinarySearchTree {
     public ArrayList<Integer> BFS() {
         if (root == null) return new ArrayList<>();
 
-        Node currentNod = root;
+        Node currentNode = root;
         Queue<Node> queue = new ArrayDeque<>();
         ArrayList<Integer> results = new ArrayList<>();
-        queue.add(currentNod);
+        queue.add(currentNode);
 
         while (queue.size() > 0) {
-            currentNod = queue.remove();
-            results.add(currentNod.value);
-            if (currentNod.left != null) {
-                queue.add(currentNod.left);
+            currentNode = queue.remove();
+            results.add(currentNode.value);
+            if (currentNode.left != null) {
+                queue.add(currentNode.left);
             }
-            if (currentNod.right != null) {
-                queue.add(currentNod.right);
+            if (currentNode.right != null) {
+                queue.add(currentNode.right);
             }
         }
 
