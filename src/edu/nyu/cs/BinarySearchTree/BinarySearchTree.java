@@ -158,4 +158,26 @@ public class BinarySearchTree {
 
         return results;
     }
+
+    // Depth First Search
+    public ArrayList<Integer> DFSPreOrder() {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        class Traverse {
+            
+            Traverse(Node currentNode) {
+                results.add(currentNode.value);
+
+                if (currentNode.left != null) {
+                    new Traverse(currentNode.left);
+                }
+                if (currentNode.right != null) {
+                    new Traverse(currentNode.right);
+                }
+            }
+        }
+        
+        new Traverse(root); // Strat from the root when doing search
+        return results;
+    }
  }
