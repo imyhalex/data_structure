@@ -4,6 +4,8 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Queue;
 
+import edu.nyu.cs.Stack.Stack;
+
 
 public class BinarySearchTree {
     private Node root;
@@ -159,7 +161,7 @@ public class BinarySearchTree {
         return results;
     }
 
-    // Depth First Search
+    // Depth First Search Pre Order
     public ArrayList<Integer> DFSPreOrder() {
         ArrayList<Integer> results = new ArrayList<>();
 
@@ -179,5 +181,73 @@ public class BinarySearchTree {
         
         new Traverse(root); // Strat from the root when doing search
         return results;
+    }
+
+    // Depth First Search Post Oreder
+    public ArrayList<Integer> DFSPostOrder() {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        class Traverse {
+            
+            Traverse(Node currentNode) {
+
+                if (currentNode.left != null) {
+                    new Traverse(currentNode.left);
+                }
+                if (currentNode.right != null) {
+                    new Traverse(currentNode.right);
+                }
+
+                results.add(currentNode.value);
+            }
+        }
+
+        new Traverse(root);
+        return results;
+    }
+
+    // Depth First Search In Order
+    public ArrayList<Integer> DFSInOrder() {
+        ArrayList<Integer> results = new ArrayList<>();
+
+        class Traverse {
+
+            Traverse(Node currentNode) {
+
+                if (currentNode.left != null) {
+                    new Traverse(currentNode.left);
+                }
+                
+                results.add(currentNode.value);
+
+                if (currentNode.right != null) {
+                    new Traverse(currentNode.right);
+                }
+            }
+        }
+
+        new Traverse(root);
+        return results;
+    }
+
+    // Coding Exercise: BST: Kth Smallest Node 
+    public Integer kthSmallest(int k) {
+        Stack<Node> stack = new Stack<>();
+        Node node = root;
+
+        while (!stack.isEmpty() || node != null) {
+            while (node != null) {
+                stack.push(node);
+                node = node.left;
+            }
+            node = stack.pop();
+            k -= 1;
+            if (k == 0) {
+                return node.value;
+            }
+            node = node.right;
+        }
+
+        return null;
     }
  }
