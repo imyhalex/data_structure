@@ -146,4 +146,41 @@ public class LinkedList {
 		}
 		tail = temp;
 	}
+
+    // Coding Exercise: Merge two sorted list of LinkedList
+    // this.head -> the elements in the existing list
+    // otherHead -> the elements in the passing list
+    // current -> the pointer of the new linked list
+    public void merge(LinkedList otherList) {
+        Node otherHead = otherList.getHead();
+        Node dummy = new Node(0);
+        Node current = dummy;
+
+        while (this.head != null && otherHead != null) {
+            if (this.head.value < otherHead.value) {
+                current.next = this.head;
+                this.head = this.head.next;
+            } else {
+                current.next = otherHead;
+                otherHead = otherHead.next;
+            }
+            current = current.next;
+        }
+
+        /*
+         * There's no need for another while loop because we don't need to do any more comparisons or element-by-element attachments. 
+         * The rest of the untraversed list can be attached in one step since it's already sorted.
+         * For example, if this.head is not null after the initial merging loop, it means all remaining elements in this list are greater than all elements already merged into current. 
+         * We can simply link the remaining part of this list to current. The same logic applies if otherHead is not null.
+         */
+        if (this.head != null) {
+            current.next = this.head;
+        } else {
+            current.next = otherHead;
+            this.tail = otherList.getTail();
+        }
+
+        head = dummy.next;
+        length += otherList.getLength();
+    }
 }
