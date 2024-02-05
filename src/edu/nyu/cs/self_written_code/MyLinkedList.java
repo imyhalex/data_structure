@@ -162,7 +162,7 @@ public class MyLinkedList<E extends Comparable<E>> {
         else {
             Node<E> previous = head;
 
-            for (int i = 0; i < index; i++) {
+            for (int i = 1; i < index; i++) {
                 previous = previous.next; 
             }
 
@@ -335,4 +335,126 @@ public class MyLinkedList<E extends Comparable<E>> {
     //     return dummy1.next;
     // }
 
+    /* LeetCode Queseiont isPalilndrome in LinkedList version */
+    // public boolean isPalindrome(ListNode head) {
+    //     if (head == null || head.next == null) return true;
+
+    //     ListNode firstHalfEnd = endOfFirstHalf(head);
+    //     ListNode secondHalfStart = reverseList(firstHalfEnd.next);
+
+    //     ListNode p1 = head;
+    //     ListNode p2 = secondHalfStart;
+    //     boolean result = true;
+    //     while (result && p2 != null) {
+    //         if (p1.val != p2.val) result = false;
+    //         p1 = p1.next;
+    //         p2 = p2.next;
+    //     }
+
+    //     // Restore the list
+    //     firstHalfEnd.next = reverseList(secondHalfStart);
+
+    //     return result;
+    // }
+
+    // private ListNode reverseList(ListNode head) {
+    //     ListNode before = null;
+    //     ListNode temp = head;
+
+    //     while (temp != null) {
+    //         ListNode after = temp.next;
+    //         temp.next = before;
+    //         before = temp;
+    //         temp = after;
+    //     }
+
+    //     return before;
+    // }
+
+    // private ListNode endOfFirstHalf(ListNode head) {
+    //     ListNode slow = head;
+    //     ListNode fast = head;
+
+    //     while (fast.next != null && fast.next.next != null) {
+    //         slow = slow.next;
+    //         fast = fast.next.next;
+    //     }
+
+    //     return slow;
+    // }
+
+    /* LeetCode Question: mergeTwoLists(Node list1, Node list2) */
+    public Node<Integer> mergeTwoList(Node<Integer> list1, Node<Integer> list2) {
+        Node<Integer> dummy = new Node<Integer>(-1);
+
+        Node<Integer> prev = dummy;
+        while (list1 != null && list2 != null) {
+            if (list1.data < list2.data) {
+                prev.next = list1;
+                list1 = list1.next;
+            } else {
+                prev.next = list2;
+                list2 = list2.next;
+            }
+
+            prev = prev.next;
+        }
+
+        if (list1 != null) {
+            prev.next = list1;
+        } else {
+            prev.next = list2;
+        }
+
+        return dummy.next;
+    } 
+
+    /* LeetCode Question: remove Duplicates from sorted List  */
+    public Node<Integer> deleteDuplicates(Node<Integer> head) {
+        Node<Integer> current = head;
+
+        // We need to make sure both nodes we compare are within the list, not null
+        while (current != null && current.next != null) {
+            if (current.data == current.next.data) {
+                current.next = current.next.next;
+            } else {
+                current = current.next;
+            }
+        }
+
+        return current;
+    }
+
+    /* LeetCode Question: Intersection of Two LinkedList */
+    public Node<Integer> getIntersectionNode(Node<Integer> headA, Node<Integer> headB) {
+        Node<Integer> pA = headA;
+        Node<Integer> pB = headB;
+
+        while (pA != pB) {
+            pA = pA == null ? headB : pA.next;
+            pB = pB == null ? headA : pB.next;
+        }
+
+        return pA;
+    }
+
+    /* LeetCode Question: Remove List Elements */
+    public Node<Integer> removeElements(Node<Integer> head, int data) {
+        Node<Integer> dummy = new Node<Integer>(-1);
+        dummy.next = head; // connect the pointer to the list we toggle with
+
+        Node<Integer> prev = dummy;
+        Node<Integer> current = head;
+        while (current != null) {
+            if (current.data == data) {
+                prev.next = current.next;
+            } else {
+                prev = current;
+            }
+
+            current = current.next;
+        }
+
+        return dummy.next;
+    }
 }  
