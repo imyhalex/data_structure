@@ -49,7 +49,6 @@ public class MyRecursiveBinarySearchTree<E extends Comparable<E>> {
 
     // helper method insert()
     private Node insert(Node node, E data) {
-        // Define a base case
         if (node == null) return new Node(data);
 
         int cmp = data.compareTo(node.data);
@@ -204,13 +203,13 @@ public class MyRecursiveBinarySearchTree<E extends Comparable<E>> {
 
         class Traverse {
             Traverse(Node node) {
-                if (node.right != null) {
+                if (node.left != null) {
                     new Traverse(node.right);
                 }
 
                 results.add(node.data);
 
-                if (node.left != null) {
+                if (node.right != null) {
                     new Traverse(node.left);
                 }
             }

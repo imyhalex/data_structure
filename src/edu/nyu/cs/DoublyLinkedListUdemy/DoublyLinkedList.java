@@ -195,7 +195,7 @@ public class DoublyLinkedList {
             temp =current.prev;
             current.prev = current.next;
             current.next = temp;
-            current = current.prev;
+            current = current.prev; // actually moveing foward -> equals to current = current.next because the pointer is changed
         }
 
         temp = head;
