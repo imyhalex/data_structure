@@ -18,5 +18,4 @@ public class Main {
         myStack2.pop();
         myStack2.printStack();
     }
-
 }
