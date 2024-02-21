@@ -183,4 +183,5 @@ public class LinkedList {
         head = dummy.next;
         length += otherList.getLength();
     }
+
 }

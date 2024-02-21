@@ -277,4 +277,78 @@ public class HashTable {
 
         return longestStreak;
     }
+
+    /* LeetCodeQuestion: Longest Substring Without Repeating Characters */
+    // hint: sliding windows, two pointers
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+
+        int left = 0;
+        int right = 0;
+
+        int res = 0;
+        while (right < s.length()) {
+            char r = s.charAt(right);
+            map.put(r, map.getOrDefault(r, 0) + 1);
+
+            while (map.get(r) > 1) {
+                char l = s.charAt(left);
+                map.put(l, map.get(l) - 1);
+                left++;
+            }
+            res = Math.max(res, right - left + 1);
+
+            right++;
+        }
+
+        return res;
+    }
+
+    // Optimization
+    public int lengthOfLongestSubstringOptz(String s) {
+        int n = s.length(), ans = 0;
+
+        Map<Character, Integer> map = new HashMap<>();
+        for (int j = 0, i = 0; j < n; j++) {
+            if (map.containsKey(s.charAt(j)))
+                i = Math.max(map.get(s.charAt(j)), i);
+            
+            ans = Math.max(ans, j - i + 1);
+            map.put(s.charAt(j), j + 1);
+        }
+
+        return ans;
+    }
+
+    /* LeetCode Question: partition labels */
+    /*
+     * You are given a string s. We want to partition the string into as many parts as possible so that each letter appears in at most one part.
+     * Input: s = "ababcbacadefegdehijhklij"
+     * Output: [9,7,8]
+     * Explanation:
+     * The partition is "ababcbaca", "defegde", "hijhklij".
+     * This is a partition so that each letter appears in at most one part.
+     * A partition like "ababcbacadefegde", "hijhklij" is incorrect, because it splits s into less parts.
+     */
+    public List<Integer> partitionLabels(String s) {
+        List<Integer> arr = new ArrayList<>();
+        Map<Character, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            map.put(s.charAt(i), i);
+        }
+
+        int start = 0, end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            end = Math.max(end, s.charAt(i));
+            if (i == end) {
+                arr.add(end - start + 1);
+                start = i + 1;
+            }
+        }
+
+        return arr;
+    }
+
+    
 }

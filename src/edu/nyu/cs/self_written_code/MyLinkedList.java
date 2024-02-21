@@ -385,7 +385,7 @@ public class MyLinkedList<E extends Comparable<E>> {
 
     /* LeetCode Question: mergeTwoLists(Node list1, Node list2) */
     public Node<Integer> mergeTwoList(Node<Integer> list1, Node<Integer> list2) {
-        Node<Integer> dummy = new Node<Integer>(-1);
+        Node<Integer> dummy = new Node<>(-1);
 
         Node<Integer> prev = dummy;
         while (list1 != null && list2 != null) {
