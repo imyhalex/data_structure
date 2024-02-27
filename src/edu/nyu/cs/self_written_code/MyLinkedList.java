@@ -1,5 +1,8 @@
 package edu.nyu.cs.self_written_code;
 
+import java.util.PriorityQueue;
+import java.util.Queue;
+
 public class MyLinkedList<E extends Comparable<E>> {
     private Node<E> head;
     private Node<E> tail;
@@ -383,32 +386,6 @@ public class MyLinkedList<E extends Comparable<E>> {
     //     return slow;
     // }
 
-    /* LeetCode Question: mergeTwoLists(Node list1, Node list2) */
-    public Node<Integer> mergeTwoList(Node<Integer> list1, Node<Integer> list2) {
-        Node<Integer> dummy = new Node<>(-1);
-
-        Node<Integer> prev = dummy;
-        while (list1 != null && list2 != null) {
-            if (list1.data < list2.data) {
-                prev.next = list1;
-                list1 = list1.next;
-            } else {
-                prev.next = list2;
-                list2 = list2.next;
-            }
-
-            prev = prev.next;
-        }
-
-        if (list1 != null) {
-            prev.next = list1;
-        } else {
-            prev.next = list2;
-        }
-
-        return dummy.next;
-    } 
-
     /* LeetCode Question: remove Duplicates from sorted List  */
     public Node<Integer> deleteDuplicates(Node<Integer> head) {
         Node<Integer> current = head;
@@ -457,4 +434,60 @@ public class MyLinkedList<E extends Comparable<E>> {
 
         return dummy.next;
     }
+
+    /* LeetCode Question: Merge k sorted list */
+    public Node<E> mergeKList(Node<E>[] lists) {
+        Node<E> dummy = new Node<>(null);
+        Node<E> current = dummy;
+
+        Queue<Node<E>> queue = new PriorityQueue<>();
+
+        if (lists == null || lists.length == 0) return null;
+
+        // Initialize with the head of each list
+        for (Node<E> list : lists) {
+            if (list != null) {
+                queue.add(list);
+            }
+        }
+
+        while (!queue.isEmpty()) {
+            Node<E> minNode = queue.poll();
+
+            current.next = minNode;
+            current = current.next;
+
+            if (minNode.next != null) {
+                queue.add(minNode.next);
+            }
+        }
+
+        return dummy.next;
+    }
+
+    /* LeetCode Question: mergeTwoLists(Node list1, Node list2) */
+    public Node<Integer> mergeTwoList(Node<Integer> list1, Node<Integer> list2) {
+        Node<Integer> dummy = new Node<>(-1);
+
+        Node<Integer> prev = dummy;
+        while (list1 != null && list2 != null) {
+            if (list1.data < list2.data) {
+                prev.next = list1;
+                list1 = list1.next;
+            } else {
+                prev.next = list2;
+                list2 = list2.next;
+            }
+
+            prev = prev.next;
+        }
+
+        if (list1 != null) {
+            prev.next = list1;
+        } else {
+            prev.next = list2;
+        }
+
+        return dummy.next;
+    } 
 }  

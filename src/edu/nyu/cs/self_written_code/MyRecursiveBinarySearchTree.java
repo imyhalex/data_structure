@@ -219,4 +219,45 @@ public class MyRecursiveBinarySearchTree<E extends Comparable<E>> {
 
         return results;
     }
+
+    /* LeetCode Question: Maximun Depth of Binary Tree */
+    public int maxDepth(Node root) {
+        if (root == null) return 0;
+
+        int leftDepth = maxDepth(root.left);
+        int rightDepth = maxDepth(root.right);
+
+        return Math.max(leftDepth, rightDepth) + 1;
+    }
+
+    /* LeetCode Question: Same Tree */
+    public boolean isSameTree(Node p, Node q) {
+        if (p == null && q == null) return true;
+        if (p == null || q == null) return false;
+        if (p.data != q.data) return false;
+        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    }
+
+    /* LeetCode Question: Invert Binary Tree */
+    public Node invertTree(Node root) {
+        if (root == null) return null;
+        Node left = invertTree(root.left);
+        Node right = invertTree(root.right);
+        root.left = right;
+        root.right = left;
+
+        return root;
+    }
+
+    /* LeetCode Question: Symmetric Tree (Mirror Tree) */
+    public boolean isSymmetric(Node root) {
+        return isSameTree(root, root);
+    }
+
+    // Helper method
+    public boolean isSymmetric(Node t1, Node t2) {
+        if (t1 == null && t2 == null) return true;
+        if (t2 == null || t2 == null) return false;
+        return (t1.data == t2.data) && isSymmetric(t1.right, t2.left) && isSymmetric(t1.left, t2.right);
+    }
 }

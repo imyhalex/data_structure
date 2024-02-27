@@ -293,6 +293,7 @@ public class HashTable {
 
             while (map.get(r) > 1) {
                 char l = s.charAt(left);
+                // exclude it from future evaluation of while (map.get(r) > 1)
                 map.put(l, map.get(l) - 1);
                 left++;
             }
