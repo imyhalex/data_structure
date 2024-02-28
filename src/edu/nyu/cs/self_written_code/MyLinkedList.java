@@ -489,5 +489,30 @@ public class MyLinkedList<E extends Comparable<E>> {
         }
 
         return dummy.next;
-    } 
+    }
+
+    /* Bubble Sort with LL */
+    public void bubbleSort() {
+        if (size < 2) return;
+
+        Node<E> sortedUntil = null;
+        while (sortedUntil != head.next) {
+            Node<E> current = head;
+
+            while (current.next != null) {
+                Node<E> nextNode = current.next;
+
+                int cmp = current.data.compareTo(nextNode.data);
+                if (cmp < 0) {
+                    E temp = current.data;
+                    current.data = nextNode.data;
+                    nextNode.data = temp;
+                }
+
+                current = current.next;
+            }
+
+            sortedUntil = current;
+        }
+    }
 }  
