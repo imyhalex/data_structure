@@ -116,6 +116,63 @@ public class SinglyLinkedList<E> implements Cloneable {
         tail = current;
     }
 
+    // public void insertionSort() {
+    //     if (head == null || head.getNext() == null) return; // List is already sorted
+    
+    //     Node<E> dummy = new Node<>(null, head); // Create a dummy node to simplify edge cases
+    //     Node<E> current = head.getNext(); // Start from the second node
+    //     Node<E> tailSorted = head; // The last node in the sorted portion
+    
+    //     while (current != null) {
+    //         if (((Comparable<E>) tailSorted.getElement()).compareTo(current.getElement()) <= 0) {
+    //             // The current node is greater than all sorted nodes, move the tailSorted forward
+    //             tailSorted = current;
+    //         } else {
+    //             // Find the correct spot for the current node in the sorted portion
+    //             Node<E> prev = dummy; // Start from the dummy node every time
+    //             while (((Comparable<E>) prev.getNext().getElement()).compareTo(current.getElement()) < 0) {
+    //                 prev = prev.getNext(); // Move forward in the sorted portion
+    //             }
+    //             // Insert the current node into the sorted portion
+    //             tailSorted.setNext(current.getNext()); // Remove current from its initial position
+    //             current.setNext(prev.getNext()); // Insert current after prev
+    //             prev.setNext(current); // Connect prev to current
+    //         }
+    //         // Move to the next node, checking if we're at the end of the sorted portion
+    //         current = tailSorted.getNext();
+    //     }
+    
+    //     head = dummy.getNext(); // Update the head in case the first element was moved
+    // }
+
+    public void insertionSort() {
+        if (head == null || head.getNext() == null) return;
+
+        Node<E> dummy = new Node<>(null, head);
+        Node<E> current = head.getNext();
+        Node<E> tailSorted = head;
+
+        while (current != null) {
+            if (((Comparable<E>) (tailSorted.getElement())).compareTo(current.getElement()) <= 0) {
+                tailSorted = current;
+            } else {
+                Node<E> prev = dummy;
+                while (((Comparable<E>) (tailSorted.getElement())).compareTo(current.getElement()) < 0) {
+                    prev = prev.getNext();
+                }
+                // swap the items
+                tailSorted.setNext(current.getNext());
+                current.setNext(prev.getNext());
+                prev.setNext(current);
+            }
+
+            current = tailSorted.getNext();
+        }
+
+        head = dummy.getNext();
+    }
+    
+
     /* Merge two lists */
     public void mergeTwoList(Node<E> head1, Node<E> head2) {
         Node<E> dummy = new Node<E>(null, null);
@@ -189,6 +246,19 @@ public class SinglyLinkedList<E> implements Cloneable {
         return result;
     }
 
+    // Helper1
+    private Node<E> endOftheFirstHalf(Node<E> head) {
+        Node<E> slow = head;
+        Node<E> fast = head;
+
+        while (fast.getNext() != null && fast.getNext().getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext().getNext();
+        }
+        return slow;
+    }
+
+    // Helper2
     private Node<E> reverseList(Node<E> node) {
         Node<E> before = null;
         Node<E> current = node;
@@ -201,17 +271,6 @@ public class SinglyLinkedList<E> implements Cloneable {
         }
 
         return before;
-    }
-
-    private Node<E> endOftheFirstHalf(Node<E> head) {
-        Node<E> slow = head;
-        Node<E> fast = head;
-
-        while (fast.getNext() != null && fast.getNext().getNext() != null) {
-            slow = slow.getNext();
-            fast = fast.getNext().getNext();
-        }
-        return slow;
     }
 
 
