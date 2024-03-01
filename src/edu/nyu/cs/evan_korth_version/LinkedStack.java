@@ -87,4 +87,22 @@ public class LinkedStack<E> implements Stack<E> {
     public String toString() {
       return list.toString();
     }
+
+    public boolean isPalindrome(Character[] array) {
+      LinkedStack<Character> stack = new LinkedStack<>();
+
+      for (int i = array.length / 2; i < array.length; i++) {
+        stack.push(array[i]);
+      }
+
+      for (int j = 0; j < array.length / 2; j++) {
+        char c = stack.pop();
+
+        if (array[j] != c) {
+          return false;
+        }
+
+      }
+      return true;
+    }
 }
