@@ -143,14 +143,18 @@ public class AVLTree {
 
         if (value < root.value) {
             root.left = deleteNode(root.left, value);
-        } else if (value > root.value) {
+        } 
+        else if (value > root.value) {
             root.right = deleteNode(root.right, value);
-        } else {
+        } 
+        else {
             if (root.left == null && root.right == null) {
                 return null;
-            } else if (root.left == null) {
+            } 
+            else if (root.left == null) {
                 root = root.right;
-            } else if (root.right == null) {
+            } 
+            else if (root.right == null) {
                 root = root.left;
             } 
             else {
