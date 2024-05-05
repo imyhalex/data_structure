@@ -38,7 +38,7 @@ void insertionSort()
 
     while (current != null) {
         if (tailSorted.getElement().compareTo(current.getElement()) <= 0)
-            tailSorted = current;]
+            tailSorted = current;
         else {
             Node<E> prev = dummy;
             while (prev.getNext().getElement().compareTo(current.getElement() < 0)
@@ -53,5 +53,62 @@ void insertionSort()
     }
 
     this.head = dummy.getNext();
+}
+```
+
+```java
+void selectionSort()
+{
+    if (this.size < 2)
+        return;
+
+    Node<E> currnet = head;
+    while (current.getNext() != null) {
+        Node<E> smallest = current;
+        Node<E> innerNode = current.getNext();
+
+        while (innserNode != null) {
+            if (smallest.getElement().compareTo(innerNode.getElement()) > 0)
+                smallest = innerNode;
+            innerNode = innerNode.getNext();
+        }
+
+        if (!smallest.equals(current)) {
+            E temp = current.getElement();
+            current.setElement(smallest.getElement());
+            smallest.setElement(temp);
+        }
+
+        current = current.getNext();
+    }
+
+    this.tail = current;
+}
+```
+```java
+void mergeSort(Node<E> head1, Node<E> head2)
+{
+    Node<E> dummy = new Node<>(null, null);
+
+    Node<E> prev = dummy;
+    while (head1 != null && head2 != null) {
+        if (head1.getElement().compareTo(head2.getElement()) < 0) {
+            prev.setNext(head1);
+            head1 = head1.getNext();
+        }
+        else {
+            prev.setNext(head2);
+            head2 = head2.getNext();
+        }
+
+        prev = prev.getNext();
+    }
+
+    if (head1 != null)
+        prev.setNext(head1);
+    else 
+        prev.setNext(head2);
+    
+    this.head = dummny.getNext();
 }
 ```
