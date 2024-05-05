@@ -34,31 +34,6 @@ public class SinglyLinkedList<E> implements Cloneable {
             }
         }
     }
-
-    /* Bubble Sort with LL */
-    // public void bubbleSort() {
-    //     if (size < 2) return;
-
-    //     Node<E> sortedUntil = new Node<>(null, null);
-    //     while (sortedUntil != head.getNext()) {
-    //         Node<E> current = head;
-
-    //         while (current.getNext() != sortedUntil) {
-    //             Node<E> nextNode = current.getNext();
-
-    //             int cmp = ((Comparable<E>) current.getElement()).compareTo(nextNode.getElement());
-    //             if (cmp > 0) {
-    //                 E temp = current.getElement();
-    //                 current.setElement(nextNode.getElement()); 
-    //                 nextNode.setElement(temp); 
-    //             }
-
-    //             current = current.getNext();
-    //         }
-
-    //         sortedUntil = current;
-    //     }
-    // }
     
     /* Bubble Sort with LL */
     public void bubbleSort() {
@@ -155,9 +130,10 @@ public class SinglyLinkedList<E> implements Cloneable {
         while (current != null) {
             if (((Comparable<E>) (tailSorted.getElement())).compareTo(current.getElement()) <= 0) {
                 tailSorted = current;
-            } else {
+            } 
+            else {
                 Node<E> prev = dummy;
-                while (((Comparable<E>) (tailSorted.getElement())).compareTo(current.getElement()) < 0) {
+                while (((Comparable<E>) (prev.getNext().getElement())).compareTo(current.getElement()) < 0) {
                     prev = prev.getNext();
                 }
                 // swap the items
