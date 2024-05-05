@@ -1,4 +1,4 @@
-## Important Sorts with LinkedList
+## Sorts with LinkedList
 ```java
 void bubbleSort() 
 {
@@ -110,5 +110,87 @@ void mergeSort(Node<E> head1, Node<E> head2)
         prev.setNext(head2);
     
     this.head = dummny.getNext();
+}
+```
+
+## Tree
+```java
+/*
+ * Given the root of a binary tree, return its maximum depth.
+ * A binary tree's maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.
+*/
+
+int maxDepth(TreeNode root)
+{
+    if (root == null)
+        return 0;
+    
+    int leftDepth = maxDepth(root.left);
+    int rightDepth = maxDepth(root.right);
+
+    return Math.max(leftDepth, rightDepth) + 1;
+}
+```
+
+```java
+/*
+ * Given the roots of two binary trees p and q, write a function to check if they are the same or not.
+ * Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.
+*/
+
+boolean isSameTree(TreeNode p, TreeNode q)
+{
+    if (p == null && q == null)
+        return true;
+
+    if (p == null || q == null) 
+        return false;
+
+    if (p.val != q.val)
+        return false;
+    
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+}
+```
+```java
+/*
+ * Invert a Binary Tree
+ * Given the root of a binary tree, invert the tree, and return its root.
+*/
+
+TreeNode invertTree(TreeNode root)
+{
+    if (root == null)
+        return null;
+    
+    TreeNode left = invertTree(root.left);
+    TreeNode right = invertTree(root.right);
+
+    root.left = right;
+    root.right = left;
+
+    return root;
+}
+```
+```java
+/*
+ * Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).
+ * This question is similar to if two tree are mirrored (isMirror)
+*/
+
+boolean isSymmetric(TreeNode root)
+{
+    return isSymmetric(root, root);
+}
+
+private boolean isSymmetric(TreeNdoe t1, TreeNode t2)
+{
+    if (t1 == null && t2 == null)
+        return true;
+    
+    if (t1 == null || t2 == null)
+        return false;
+    
+    return (t1.val == t2.val) && isSymmetric(t1.left, t2.right) && isSymmetric(t1.right, t2.left);
 }
 ```
