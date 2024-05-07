@@ -194,3 +194,52 @@ private boolean isSymmetric(TreeNdoe t1, TreeNode t2)
     return (t1.val == t2.val) && isSymmetric(t1.left, t2.right) && isSymmetric(t1.right, t2.left);
 }
 ```
+
+```java
+/*
+ * Given the root of a binary tree and an integer targetSum, 
+ * return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
+*/
+
+boolean hasPathSum(TreeNode root, int targetSum)
+{
+    if (root == null)
+        return false;
+    
+    targetSum -= root.val;
+
+    if (root.left == nulll && root.right == null)
+        return targetSum == 0;
+    
+    return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
+}
+```
+
+```java
+/*
+ * Minimum Absoulute Difference in BST
+ * Given the root of a Binary Search Tree (BST), return the minimum absolute difference between the values of any two different nodes in the tree.
+*/
+
+int getMinimumDifference(TreeNode root) 
+{
+    ArrayList<Integer> list = new ArrayList<>();
+    list = infix(root, list);
+
+    int minDiff = Integer.MAX_VALUE;
+    for (int i = 1; i < list.size(); i++) { // i should start from 1
+        minDiff = Math.min(minDiff, list.get(i) - list.get(i - 1));
+    }
+
+    return minDiff;
+}
+
+private ArrayList<Integer> infix(TreeNode root, ArrayList<Integer> list) 
+{
+    if (root == null) return list;
+    infix(root.left, list);
+    list.add(root.val);
+    infix(root.right, list);
+    return list;
+}
+```
