@@ -160,8 +160,7 @@ boolean isSameTree(TreeNode p, TreeNode q)
 
 TreeNode invertTree(TreeNode root)
 {
-    if (root == null)
-        return null;
+    if (root == null) return null;
     
     TreeNode left = invertTree(root.left);
     TreeNode right = invertTree(root.right);
@@ -278,5 +277,42 @@ List<Integer> rightSideView(TreeNode root)
     }
 
     return list;
+}
+```
+
+```java
+/*
+    Average of levels in Binary Tree
+    Given the root of a binary tree, return the average value of the nodes on each level in the form of an array. Answers within 10-5 of the actual answer will be accepted.
+*/
+
+List<Double> averageOfLevel(TreeNode root)
+{
+    List<Double> averages = new ArrayListM<>();
+    if (root == null) return averages;
+
+    Queue<TreeNode> queue = new LinkedList<>();
+    queue.add(root);
+    while (!queue.isEmpty()) {
+        Double sum = 0.0;
+        int levelSize = queue.size();
+
+        for (int i = 0; i < levelSize; i++) {
+            TreeNode node = queue.poll();
+
+            if (node.left != null) 
+                queue.add(node.left);
+
+            if (node.right != null)
+                queue.add(node.right);
+            
+            sum += node.vall;
+        }
+
+        Double avearge = sum / levelSize;
+        averages.add(average);
+    }
+
+    return averages;
 }
 ```
