@@ -243,3 +243,40 @@ private ArrayList<Integer> infix(TreeNode root, ArrayList<Integer> list)
     return list;
 }
 ```
+
+```java
+// Binary Tree Right Side View
+// Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom
+
+// Objective: get the rightmost node in each level
+// Concepts: BFS
+List<Integer> rightSideView(TreeNode root)
+{
+    List<Integer> list = new ArrayList<>();
+    if (root == null) return list;
+
+    Queue<TreeNode> currentLevel = new LinkedList<>();
+    currentLevel.add(root);
+
+    while (!currentLevel.isEmpty()) {
+        int currentSize = currentLevel.size();
+
+        for (int i = 0; i < currentSize; i++) {
+            TreeNode node = currentLevel.poll();
+
+            // Action 1: get the rightmost node when reach the max size of the queue
+            if (i == currentSize - 1)
+                list.add(node.val);
+            
+            // Action 2: Treaverse the tree to the next level and update the currentLevel
+            if (node.left != null)
+                currentLevel.add(node.left);
+            
+            if (node.right != null)
+                currentLevel.add(node.right);
+        }
+    }
+
+    return list;
+}
+```
