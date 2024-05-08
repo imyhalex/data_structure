@@ -354,3 +354,79 @@ List<List<Integer>> zigzagLevelOrder(TreeNode root)
     return zigOrder;
 }
 ```
+
+```java
+/**
+ * Covnert Sorted Array to Binary Search Tree
+ * Given an integer array nums where the elements are sorted in `ascending order`, convert it to a height-balanced binary search tree.
+ * 
+ **/
+
+TreeNode sortedArrayBST(int[] nums)
+{
+    return helper(numns, 0, nums.length - 1);
+}
+
+private TreeNode helper(int[] nums, int left, int right)
+{
+    Random rand = new Random();
+
+    if (left > right) return null;
+
+    // find the middle node
+    int p = (left + right) / 2;
+    // If left + right is odd, add randomly 0 or 1 to p-index; randomly choose another middle node
+    if ((left + right) % 2 == 1)
+        p += rand.nextInt(2);
+
+    // do preorder traversal
+    TreeNode root = new TreeNode(nums[p]);
+    root.left = helper(nums, left, p - 1);
+    root.right = helper(nums, p + 1, right);
+    
+    return root;
+}
+```
+```java
+/***
+ * Construct BST from Sorted Linked List 
+ * Given the head of a singly linked list where elements are sorted in ascending order, convert it to a height-balanced binary search tree.
+*/
+
+TreeNode linkedListToBST(ListNode head)
+{
+    if (head == null) return null;
+
+    ListNode mid = findTheMiddleNode(head);
+
+    TreeNode node = new TreeNode(mid.val);
+
+    // if there is only one element in the linked list
+    if (head == mid) {
+        return node;
+    }
+
+    node.left = linkedListToBST(head);
+    node.right = linkedListToBST(mid.next);
+    return node;
+}
+
+private ListNode findTheMiddleNode(ListNode head)
+{
+    ListNode prev = null; // the pointer used to disconnect the left half from the mid node
+    ListNode slow = head;
+    ListNode fast = head;
+
+    while (fast != null && fast.next != null) {
+        prev = slow;
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    if (prev != null) {
+        prev.next = null;
+    }
+
+    return slow;
+}
+```
