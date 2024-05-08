@@ -202,13 +202,11 @@ private boolean isSymmetric(TreeNdoe t1, TreeNode t2)
 
 boolean hasPathSum(TreeNode root, int targetSum)
 {
-    if (root == null)
-        return false;
+    if (root == null) return false;
     
     targetSum -= root.val;
 
-    if (root.left == nulll && root.right == null)
-        return targetSum == 0;
+    if (root.left == nulll && root.right == null) return targetSum == 0;
     
     return hasPathSum(root.left, targetSum) || hasPathSum(root.right, targetSum);
 }
@@ -314,5 +312,45 @@ List<Double> averageOfLevel(TreeNode root)
     }
 
     return averages;
+}
+```
+```java
+/*
+    Given the root of a binary tree, return the zigzag level order traversal of its nodes' values. (i.e., from left to right, then right to left for the next level and alternate between).
+    Input: root = [3,9,20,null,null,15,7]
+    Output: [[3],[20,9],[15,7]]
+*/
+List<List<Integer>> zigzagLevelOrder(TreeNode root)
+{
+    List<List<Integer>> zigOrder = new ArrayList<>();
+    Queue<TreeNode> queue = new LinkedList<>();
+
+    if (root = null) return zigOrder;
+    queue.add(root);
+    boolean leftToRight = true;
+
+    while (!queue.isEmpty()) {
+        int levelSize = queue.size();
+        List<Integer> list = new ArrayList<>();
+
+        for (int i = 0; i < levelSize; i++) {
+            TreeNode node = queue.poll();
+            
+            if (leftToRight)
+                list.add(node.val);
+            else
+                list.add(0, node.val);
+
+            if (node.left != null)
+                quene.add(node.left);
+            
+            if (node.right != null)
+                queue.add(node.right);
+        }
+        leftToRight = !leftToRight;
+        zigOrder.add(list);
+    }
+
+    return zigOrder;
 }
 ```
