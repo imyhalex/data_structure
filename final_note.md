@@ -59,20 +59,21 @@ void insertionSort()
 ```java
 void selectionSort()
 {
-    if (this.size < 2)
-        return;
+    if (this.size < 2) return;
 
-    Node<E> currnet = head;
+    Node<E> current = head;
     while (current.getNext() != null) {
-        Node<E> smallest = current;
-        Node<E> innerNode = current.getNext();
+        Node<E> smallest = current; // update the 'smallest' and 'current' pointer
+        Node<E> innerNode = current.getNext(); // the innerNode pointer has updated to the next one of the current
 
-        while (innserNode != null) {
-            if (smallest.getElement().compareTo(innerNode.getElement()) > 0)
+        while (innerNode != null) {
+            if (smallest.getElement().compareTo(innerNode.getElement()) > 0) {
                 smallest = innerNode;
+            }
             innerNode = innerNode.getNext();
         }
 
+        // is not equal means now the smallest node had been found and and now two pointers are not point to the same node
         if (!smallest.equals(current)) {
             E temp = current.getElement();
             current.setElement(smallest.getElement());
