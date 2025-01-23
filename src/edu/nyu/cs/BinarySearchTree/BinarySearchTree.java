@@ -20,6 +20,10 @@ public class BinarySearchTree {
         }
     }
 
+    public BinarySearchTree() {
+        root = null;
+    }
+
     public BinarySearchTree(int value) {
         Node newNode = new Node(value);
         root = newNode;
